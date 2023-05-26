@@ -61,6 +61,7 @@ form{
     border-radius: 10px;
 }
 .group-input-icon i{
+    flex: 0 0 59px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -83,20 +84,24 @@ form{
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
+    margin: 15px 0px;
     
 }
 .group-forget-register a{
     color: #979797;
 }
-.forget-account, .register-account{
+.forget-account, .register-account, .back-login{
     font-style: italic;
     text-decoration: underline;
     letter-spacing: 0.4px;
     font-size: 1.1rem;
     font-weight: 500;
 }
-.register-account{
+.register-account, .back-login{
     text-decoration: none;
+}
+.back-login:hover{
+    color: #f6753c; 
 }
 
 .btn-login{

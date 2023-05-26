@@ -1,77 +1,37 @@
-@extends('layouts.app')
+@extends('layoutsAuth.authApp')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
+<div class="wrapper">
+    <div class="title">
+        <h2>REGISTER FORM</h2>
     </div>
+    <form action="#" method="post">
+        @csrf
+        <div class="group-input-icon">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" name="userame_register" placeholder="Enter username !">
+        </div>
+        <div class="group-input-icon">
+            <i class="fa-solid fa-envelope"></i>
+            <input type="email" name="email_register" placeholder="Enter email !">
+        </div>
+        <div class="group-input-icon">
+            <i class="fa-solid fa-phone"></i>
+            <input type="tel" name="phone_register" placeholder="Phone Number !">
+        </div>
+        <div class="group-input-icon">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password_register" name="password_register" placeholder="Enter password !">
+        </div>
+        <div class="group-input-icon">
+            <i class="fa-solid fa-lock-open"></i>
+            <input type="confirm_password_register" name="confirm_password_register" placeholder="Re enter password !">
+        </div>
+        <div class="group-forget-register">
+            <a href="#" class="forget-account">forget account</a>
+            <a href="#" class="back-login">Back Login</a>
+        </div>
+        <button type="submit" class="btn btn-login">Register Account</button>
+    </form>
 </div>
 @endsection
