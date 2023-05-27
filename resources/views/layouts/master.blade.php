@@ -73,100 +73,29 @@
                         <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
                     </div>
                 </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
-                    </div>
-                </div>
+
+
             </div>
         </div>
         <div id="main-content">
-            @yield('content')
+            <div id="header-main-content">
+                <div class="button-back">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </div>
+                <div class="information-user-chatting">
+                    <h2 class="personal-name">M Agus Khamsinindo</h2>
+                    <p class="last-seen">Last Online : 3 Hours Ago</p>
+                </div>
+                <div id="remove-chat">
+                    <div class="btn-remove-chat">
+                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                    </div>
+                    <div class="link-remove-chat">
+                        <a href="#">Remove Chat</a>
+                    </div>
+                </div>
+            </div>
+            <!-- @yield('content') -->
         </div>
     </div>
 
@@ -180,10 +109,18 @@
 
 
     <script>
+        // open bars menu
         $('#open-sub-menu-sidebar').click(function() {
             let subMenuSideBar = $(this).parent().find('.sub-menu-sidebar-content');
             // console.log(subMenuSideBar)
             subMenuSideBar.toggleClass('show-sub-menu-sidebar-content');
+        })
+
+
+        // open link remove chat
+        $('#remove-chat').click(function() {
+            let open_link_remove_chat = $(this).find('.link-remove-chat');
+            open_link_remove_chat.toggleClass('show-link-remove-chat')
         })
     </script>
 </body>

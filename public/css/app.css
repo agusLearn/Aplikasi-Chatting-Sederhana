@@ -180,7 +180,73 @@ p{
 #main-content{
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
+
+/* css header main content */
+#header-main-content{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+    padding: 0 10px;
+    height: 71px;
+    background-color: #ff4e00;
+}
+/* css button back (header main content) */
+#header-main-content .button-back{
+    flex: 0 0 auto;
+    font-size: 1.7rem;
+    padding: 0 15px;
+    cursor: pointer;
+    color: white;
+    /* border: 1px solid black; */
+}
+
+/* css information user chatting (header main content) */
+#header-main-content .information-user-chatting{
+    flex: 0 1 100%;
+    display: flex;
+    flex-direction: column;
+}
+#header-main-content .information-user-chatting .personal-name{
+    margin-bottom: 0;
+    font-size: 1.4rem;
+    letter-spacing: 0.7px;
+    font-weight: 600;
+    color: white;
+}
+#header-main-content .information-user-chatting .last-seen{
+    font-weight: 500;
+    font-size: 0.98rem;
+    color: #ffbbbb;
+}
+/* css remove chat (header main content) */
+#remove-chat{
+    position: relative;
+}
+#remove-chat .btn-remove-chat{
+    font-size: 1.7rem;
+    padding: 0 15px;
+    color: #ffbbbb;
+    cursor: pointer;
+}
+#remove-chat .link-remove-chat{
+    display: none;
+    position: absolute;
+    top: 56px;
+    left: -95px;
+    background-color: #f04c04;
+    padding: 10px;
+}
+#remove-chat .link-remove-chat a{
+    color: white;
+    font-weight: 500;
+}
+.show-link-remove-chat{
+    display: block !important;
+}
+
 
 
 /* css query */
