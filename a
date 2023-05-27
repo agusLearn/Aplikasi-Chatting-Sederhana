@@ -1,0 +1,35 @@
+[33mcommit 8985297b9a69f60f33a439df1b41da0e782012bc[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: agus <agusnindo@gmail.com>
+Date:   Fri May 26 22:14:36 2023 +0700
+
+    pembuatan halaman regiter account aplikasi chattingan dan menambah atau merubah styleAuth css-nya untuk halaman register
+
+[33mcommit fc7e8fd1e54267f439924ee944c8cbc242f5301a[m
+Author: agus <agusnindo@gmail.com>
+Date:   Fri May 26 22:02:36 2023 +0700
+
+    memindahkan function showRegisterForm dari vendor registersUsers ke RegisterController
+
+[33mcommit a198613a59185e53098470416689e8497d9411cf[m
+Author: agus <agusnindo@gmail.com>
+Date:   Fri May 26 20:47:57 2023 +0700
+
+    Pembuatan layouts Auth untuk tampilan login beserta pembuatan css, masih kurang tampilan register
+
+[33mcommit 8a337729f6f7091851bfb8fcbf8f25ef9d2a99d8[m
+Author: agus <agusnindo@gmail.com>
+Date:   Fri May 26 19:35:41 2023 +0700
+
+    Process pembuatan tampilan login
+
+[33mcommit f14dddfdfe90e2d546c2a0fb01da583556754956[m
+Author: agus <agusnindo@gmail.com>
+Date:   Fri May 26 18:38:23 2023 +0700
+
+    Laravel UI bootstrap install
+
+[33mcommit 1927528f8f3a7c475ec03cd06a25b9b451ebabcd[m
+Author: agus <agusnindo@gmail.com>
+Date:   Fri May 26 16:25:26 2023 +0700
+
+    Upload Framework laravel
