@@ -34,7 +34,6 @@
                     </div>
                     <div class="sub-menu-sidebar-content">
                         <a href="#">profile</a>
-                        <a href="#">Setting</a>
                         <a href="#">Logout</a>
                     </div>
                 </div>
