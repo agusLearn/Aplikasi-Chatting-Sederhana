@@ -70,11 +70,9 @@
                     </div>
                     <div class="info-friend ">
                         <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit amet consectetur adipisicing elit... </p>
+                        <p class="highlight-chat">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea tempora modi, </p>
                     </div>
                 </div>
-
-
             </div>
         </div>
         <div id="main-content">
@@ -94,6 +92,47 @@
                         <a href="#">Remove Chat</a>
                     </div>
                 </div>
+            </div>
+
+            <div id="content">
+                <div id="content-chat">
+                    <!-- left chat -->
+                    <div class="left-chat">
+                        <p class="text-chat">
+                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio cupiditate quidem alias cumque iusto ipsum consectetur assumenda nemo nobis vero. Accusamus expedita fugit dolore officiis doloremque eius laborum dignissimos eos!
+                        </p>
+                        <p class="time-chat">07:30</p>
+                    </div>
+                    <div class="left-chat">
+                        <p class="text-chat">
+                            o   
+                        </p>
+                        <p class="time-chat">07:30</p>
+                    </div>
+                    <!-- right chat -->
+                    <div class="right-chat">
+                        <div class="text-chat">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro libero eligendi natus repudiandae, animi mollitia illo, maiores eius incidunt obcaecati in, ea nostrum soluta atque provident quisquam! Veniam, dolores dolore.
+                        </div>
+                        <div class="time-chat">21:29</div>
+                    </div>
+                    <div class="right-chat">
+                        <div class="text-chat">
+                          oke
+                        </div>
+                        <div class="time-chat">21:34</div>
+                    </div>
+                </div>
+                <form action="#" id="form-chat">
+                    <div class="group-form-chat">
+                        <textarea name="" id="text-chat" cols="50" rows="1" oninput="enter_grow(this)"></textarea>
+                        <div class="button-send">
+                            <button>
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <!-- @yield('content') -->
         </div>
@@ -122,6 +161,19 @@
             let open_link_remove_chat = $(this).find('.link-remove-chat');
             open_link_remove_chat.toggleClass('show-link-remove-chat')
         })
+
+
+        function enter_grow(el) {
+            el.style.height = "10px";
+            let size_el_textarea = el.scrollHeight;
+            if(size_el_textarea >= 159){
+                el.style.height = "159px"
+            }else{
+                el.style.height = (el.scrollHeight) + "px"
+            }
+
+            // $('#content-chat').
+        }
     </script>
 </body>
 
