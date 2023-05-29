@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\ChattRoomController;
+use App\Http\Controllers\SearchFriendsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,10 +21,17 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
+// application route
 Route::get('/', [AppController::class, 'appChat'])->name('appChat');
+Route::get('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('chatRoom');
 
+Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends');
+
+
+// auth route
 Route::get('login-view', [LoginController::class, 'login_view']);
-
 Auth::routes();
+
+// aplication route
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -224,6 +224,10 @@ p {
     /* border: 1px solid black; */
 }
 
+.show-button-back {
+    display: block;
+}
+
 /* css information user chatting (header main content) */
 #header-main-content .information-user-chatting {
     flex: 0 1 100%;
@@ -284,7 +288,7 @@ p {
     height: calc(100% - 53px);
 }
 
-#content-chat{
+#content-chat {
     display: flex;
     flex-direction: column;
     height: 85vh;
@@ -292,6 +296,7 @@ p {
     overflow-y: auto;
     gap: 15px;
 }
+
 #content-chat::-webkit-scrollbar {
     width: 2px;
 }
@@ -305,7 +310,8 @@ p {
     border-radius: 20px;
 }
 
-#content-chat .left-chat, #content .right-chat{
+#content-chat .left-chat,
+#content .right-chat {
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -317,10 +323,11 @@ p {
 }
 
 /* css left chat */
-#content-chat .left-chat{
+#content-chat .left-chat {
     background: #dcdbdb;
 }
-.left-chat .time-chat{
+
+.left-chat .time-chat {
     align-self: end;
     margin-left: 30px;
     color: #9b9b9b;
@@ -328,12 +335,13 @@ p {
 }
 
 /* right chat */
-#content-chat .right-chat{
+#content-chat .right-chat {
     color: white;
     background: #f04c04;
     align-self: self-end;
 }
-.right-chat .time-chat{
+
+.right-chat .time-chat {
     margin-right: 30px;
     font-size: 1rem;
     color: #e4e3e3;
@@ -346,24 +354,28 @@ p {
     width: 100%;
     padding: 10px;
 }
-.group-form-chat{
+
+.group-form-chat {
     display: flex;
     outline: auto;
     outline-color: #ff4e00;
     background: white;
 }
-.group-form-chat textarea{
+
+.group-form-chat textarea {
     flex: 0 1 100%;
     border: none;
     outline: none;
     padding: 5px 10px;
     padding-top: 10px;
 }
-.group-form-chat .button-send{
+
+.group-form-chat .button-send {
     display: flex;
     background: white;
 }
-.group-form-chat button{
+
+.group-form-chat button {
     font-size: 1.6rem;
     padding: 2px 18px;
     border: none;
@@ -372,32 +384,37 @@ p {
 
 
 /* CSS find friends */
-#find-friends{
+#find-friends {
     display: flex;
     flex-direction: column;
     gap: 20px;
     padding: 10px;
 }
-.group-list-find-friends{
+
+.group-list-find-friends {
     display: flex;
     justify-content: space-between;
     gap: 15px;
     align-items: center;
 }
-.foto-find-friends{
+
+.foto-find-friends {
     width: 57px;
-} 
-.foto-find-friends img{
+}
+
+.foto-find-friends img {
     width: 100%;
     height: inherit;
     object-fit: fill;
     border-radius: 50%;
 }
-.name-find-friends{
+
+.name-find-friends {
     flex: 0 1 100%;
     font-size: 1.6rem;
 }
-#btn-add-friends{
+
+#btn-add-friends {
     padding: 5px 7px;
     width: 150px;
     border: none;
@@ -407,9 +424,12 @@ p {
     border-radius: 10px;
     font-weight: 500;
 }
-#btn-add-friends:hover{
+
+#btn-add-friends:hover {
     background: #ff4e00;
 }
+
+
 
 
 /* css query */
@@ -424,17 +444,29 @@ p {
         padding-bottom: 0;
     }
 
-    #main-content #content-chat{
+    #main-content #content-chat {
         height: 87vh;
     }
-    #header-main-content .button-back{
+
+    #header-main-content .button-back {
         display: block;
     }
 
 
     /*mobile  content chat versi under size 1119px */
-    #content-chat .left-chat, #content .right-chat{
+    #content-chat .left-chat,
+    #content .right-chat {
         max-width: 60%;
     }
-    
+
+
+    /* show content */
+    .show-app-content {
+        display: flex !important;
+    }
+
+    .hide-app-content {
+        display: none !important; 
+    }
+
 }

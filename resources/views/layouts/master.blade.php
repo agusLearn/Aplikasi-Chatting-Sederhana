@@ -27,14 +27,16 @@
 <body>
     <div id="app-chat">
 
-        @include('layouts.sidebarContent')
+        <div id="sidebar-content">
+            @include('layouts.sidebarContent')
+        </div>
+
         <div id="main-content">
             <div id="header-main-content">
-                @yield('header-content')
+                @yield('header-main-content')
             </div>
 
             <div id="content">
-              
                 @yield('content')
             </div>
         </div>
@@ -46,7 +48,14 @@
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-    @stack('js')
+    <!-- script csrf -->
+    <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
 
     <script>
@@ -59,7 +68,7 @@
 
 
         // open link remove chat
-        $('#remove-chat').click(function() {
+        $('body').on('click', '#remove-chat', function() {
             let open_link_remove_chat = $(this).find('.link-remove-chat');
             open_link_remove_chat.toggleClass('show-link-remove-chat')
         })
@@ -73,10 +82,82 @@
             } else {
                 el.style.height = (el.scrollHeight) + "px"
             }
-
-            // $('#content-chat').
         }
     </script>
+
+
+    <!-- open chat room  -->
+    <script>
+        $('#list-friends-chat').on('click', '.group-list-friend', function() {
+            addActiveClass($(this))
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('chatRoom') }}",
+                success: function(res) {
+                    $('#main-content').addClass('show-app-content');
+                    $('#sidebar-content').addClass('hide-app-content');
+                    $('#main-content').html(res.html_chat_room)
+                }
+            })
+        })
+
+
+        let addActiveClass = function(element) {
+            $('.group-list-friend').removeClass('active-click')
+            element.addClass('active-click')
+        }
+    </script>
+
+    <!-- search friends -->
+    <script>
+        $('#form-search').submit(function(e) {
+            e.preventDefault();
+            let name = $('#find-name').val();
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('searchFriends') }}",
+                data: {
+                    name: name
+                },
+                success: function(res) {    
+                    $('#main-content').html(res.html)
+                    $('#main-content').addClass('show-app-content');
+                    $('#sidebar-content').addClass('hide-app-content');
+                }
+            })
+        })
+    </script>
+
+    <!-- button back size mobile -->
+    <script>
+        $('body').on('click', '#header-main-content .button-back', function() {
+            $('#main-content').removeClass('show-app-content');
+            $('#sidebar-content').removeClass('hide-app-content');
+            $('.group-list-friend').removeClass('active-click')
+            $('#header-main-content').html(''); // remove content in header  content
+            $('#content').html(''); // remove content
+        })
+    </script>
+
+
+    <!-- jquery windows size check -->
+    <script>
+        $(window).resize(function() {
+            let widthSize = $(window).width();
+
+            if (widthSize <= 1119) {
+                // open btn-back header
+                $('#header-main-content .button-back').addClass('show-button-back');
+            } else {
+                $('#header-main-content .button-back').removeClass('show-button-back');
+            }
+        })
+    </script>
+
+
+    @stack('js')
 </body>
 
 </html>
