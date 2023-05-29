@@ -22,14 +22,14 @@ use Illuminate\Support\Facades\Route;
 // });
 
 // application route
-Route::get('/', [AppController::class, 'appChat'])->name('appChat');
+Route::get('/', [AppController::class, 'appChat'])->name('appChat')->middleware('checkLogin');
 Route::get('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('chatRoom');
 
 Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends');
 
 
 // auth route
-Route::get('login-view', [LoginController::class, 'login_view']);
+Route::get('login-view', [LoginController::class, 'login_view'])->name('login-view');
 Auth::routes();
 
 // aplication route
