@@ -276,6 +276,7 @@ p {
 }
 
 
+/* css content */
 #content {
     display: flex;
     flex-direction: column;
@@ -369,15 +370,57 @@ p {
     align-self: end;
 }
 
+
+/* CSS find friends */
+#find-friends{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+.group-list-find-friends{
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    align-items: center;
+}
+.foto-find-friends{
+    width: 57px;
+} 
+.foto-find-friends img{
+    width: 100%;
+    height: inherit;
+    object-fit: fill;
+    border-radius: 50%;
+}
+.name-find-friends{
+    flex: 0 1 100%;
+    font-size: 1.6rem;
+}
+#btn-add-friends{
+    padding: 5px 7px;
+    width: 150px;
+    border: none;
+    background: #f04c04;
+    color: white;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    font-weight: 500;
+}
+#btn-add-friends:hover{
+    background: #ff4e00;
+}
+
+
 /* css query */
 @media screen and (max-width : 1119px) {
     #sidebar-content {
-        /* flex: auto; */
-        display: none;
+        flex: auto;
     }
 
+    /* mobile css content */
     #main-content {
-        display: block;
+        display: none;
         padding-bottom: 0;
     }
 
@@ -389,7 +432,7 @@ p {
     }
 
 
-    /* css content chat versi under size 1119px */
+    /*mobile  content chat versi under size 1119px */
     #content-chat .left-chat, #content .right-chat{
         max-width: 60%;
     }

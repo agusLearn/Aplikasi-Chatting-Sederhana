@@ -26,114 +26,17 @@
 
 <body>
     <div id="app-chat">
-        <div id="sidebar-content">
-            <div class="header-sidebar-content">
-                <div class="group-menu-sidebar-content">
-                    <div id="open-sub-menu-sidebar" class="dropdown-3-icon">
-                        <i class="fa-solid fa-bars"></i>
-                    </div>
-                    <div class="sub-menu-sidebar-content">
-                        <a href="#">profile</a>
-                        <a href="#">Logout</a>
-                    </div>
-                </div>
-                <form action="#" id="form-search">
-                    <input type="text">
-                    <button>
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </form>
-            </div>
-            <div id="list-friends-chat">
-                <div class="group-list-friend active-click">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit.... </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Sticker </p>
-                    </div>
-                </div>
-                <div class="group-list-friend">
-                    <div class="photo-friend">
-                        <img src="{{ asset('photo-profile/default.png') }}" alt="">
-                    </div>
-                    <div class="info-friend ">
-                        <h2 class="name-friend">M Agus Khamsinindo</h2>
-                        <p class="highlight-chat">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea tempora modi, </p>
-                    </div>
-                </div>
-            </div>
-        </div>
+
+        @include('layouts.sidebarContent')
         <div id="main-content">
             <div id="header-main-content">
-                <div class="button-back">
-                    <i class="fa-solid fa-arrow-left"></i>
-                </div>
-                <div class="information-user-chatting">
-                    <h2 class="personal-name">M Agus Khamsinindo</h2>
-                    <p class="last-seen">Last Online : 3 Hours Ago</p>
-                </div>
-                <div id="remove-chat">
-                    <div class="btn-remove-chat">
-                        <i class="fa-solid fa-ellipsis-vertical"></i>
-                    </div>
-                    <div class="link-remove-chat">
-                        <a href="#">Remove Chat</a>
-                    </div>
-                </div>
+                @yield('header-content')
             </div>
 
             <div id="content">
-                <div id="content-chat">
-                    <!-- left chat -->
-                    <div class="left-chat">
-                        <p class="text-chat">
-                            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio cupiditate quidem alias cumque iusto ipsum consectetur assumenda nemo nobis vero. Accusamus expedita fugit dolore officiis doloremque eius laborum dignissimos eos!
-                        </p>
-                        <p class="time-chat">07:30</p>
-                    </div>
-                    <div class="left-chat">
-                        <p class="text-chat">
-                            o   
-                        </p>
-                        <p class="time-chat">07:30</p>
-                    </div>
-                    <!-- right chat -->
-                    <div class="right-chat">
-                        <div class="text-chat">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro libero eligendi natus repudiandae, animi mollitia illo, maiores eius incidunt obcaecati in, ea nostrum soluta atque provident quisquam! Veniam, dolores dolore.
-                        </div>
-                        <div class="time-chat">21:29</div>
-                    </div>
-                    <div class="right-chat">
-                        <div class="text-chat">
-                          oke
-                        </div>
-                        <div class="time-chat">21:34</div>
-                    </div>
-                </div>
-                <form action="#" id="form-chat">
-                    <div class="group-form-chat">
-                        <textarea name="" id="text-chat" cols="50" rows="1" oninput="enter_grow(this)"></textarea>
-                        <div class="button-send">
-                            <button>
-                                <i class="fa-solid fa-paper-plane"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
+              
+                @yield('content')
             </div>
-            <!-- @yield('content') -->
         </div>
     </div>
 
@@ -165,9 +68,9 @@
         function enter_grow(el) {
             el.style.height = "10px";
             let size_el_textarea = el.scrollHeight;
-            if(size_el_textarea >= 159){
+            if (size_el_textarea >= 159) {
                 el.style.height = "159px"
-            }else{
+            } else {
                 el.style.height = (el.scrollHeight) + "px"
             }
 
