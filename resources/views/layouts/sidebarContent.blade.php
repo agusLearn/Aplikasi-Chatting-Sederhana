@@ -5,7 +5,7 @@
         </div>
         <div class="sub-menu-sidebar-content">
             <a href="#">profile</a>
-            <a href="#">Logout</a>
+            <a href="{{ route('logout-account') }}">Logout</a>
         </div>
     </div>
     <form id="form-search" method="post">

@@ -12,6 +12,7 @@ body {
     background: rgb(255, 183, 0);
     background: radial-gradient(circle, rgba(255, 183, 0, 1) 26%, rgba(243, 102, 15, 1) 68%);
     padding: 10px;
+
 }
 
 a{
@@ -20,6 +21,11 @@ a{
 }
 
 #layoutApp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     display: flex;
     align-items: center;
     justify-content: center;

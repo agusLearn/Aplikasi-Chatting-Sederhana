@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -38,7 +44,45 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login_view(){
+    public function showLoginForm()
+    {
         return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $this->validateLogin($request);
+
+
+        if (Auth::attempt(['email' => $request->username, 'password' => $request->password])) {
+
+            $updateStatusActive = User::where('id', Auth::user()->id)->first();
+            $updateStatusActive->status_active = 1;
+            $updateStatusActive->save();
+            return redirect()->route('appChat');
+        }
+
+        Session::flash('failed', 'Your Account Not Registered');
+        return redirect()->back();
+    }
+
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
+    }
+
+    public function logout(Request $request)
+    {
+        $updateStatusActive = User::where('id', Auth::user()->id)->first();
+        $updateStatusActive->status_active = 0;
+
+        $statusUpdate = $updateStatusActive->save();
+        if ($statusUpdate == true) {
+            Auth::logout();
+            return redirect()->route('login');
+        }
     }
 }

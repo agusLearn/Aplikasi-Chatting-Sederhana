@@ -5,11 +5,11 @@
     <div class="title">
         <h2>LOGIN FORM</h2>
     </div>
-    <form action="#" method="post">
+    <form action="{{ route('login') }}" method="post">
         @csrf
         <div class="group-input-icon">
             <i class="fa-solid fa-user"></i>
-            <input type="text" name="userame" placeholder="Enter username !">
+            <input type="text" name="username" placeholder="Enter username !">
         </div>
         <div class="group-input-icon">
             <i class="fa-solid fa-lock"></i>
@@ -17,7 +17,7 @@
         </div>
         <div class="group-forget-register">
             <a href="#" class="forget-account">forget account</a>
-            <a href="#" class="register-account">register account</a>
+            <a href="{{ route('register') }}" class="register-account">register account</a>
         </div>
         <button type="submit" class="btn btn-login">Login</button>
     </form>

@@ -4,6 +4,7 @@ use App\Http\Controllers\AppController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChattRoomController;
 use App\Http\Controllers\SearchFriendsController;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,9 +28,12 @@ Route::get('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('cha
 
 Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends');
 
+Route::get('test', function() {
+    return Carbon::today();
+});
 
 // auth route
-Route::get('login-view', [LoginController::class, 'login_view'])->name('login-view');
+Route::get('logout', [LoginController::class, 'logout'])->name('logout-account');
 Auth::routes();
 
 // aplication route

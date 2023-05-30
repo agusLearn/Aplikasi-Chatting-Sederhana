@@ -21,7 +21,7 @@ class checkLogin
     {
         if(!Auth::check()){
             Session::flash('login-information', 'Dont Have Permission, Need Login First!');
-            return redirect()->route('login-view');
+            return redirect()->route('login');
         }
 
         return $next($request);

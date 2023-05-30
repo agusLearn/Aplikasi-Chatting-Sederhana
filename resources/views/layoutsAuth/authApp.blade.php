@@ -53,6 +53,20 @@
                     'warning'
                 )
             }
+            if ("{{ $message = Session::get('failed') }}") {
+                Swal.fire(
+                    'Read! ',
+                    "{{ $message }}",
+                    'warning'
+                )
+            }
+            if ("{{ $message = Session::get('success') }}") {
+                Swal.fire(
+                    'Read! ',
+                    "{{ $message }}",
+                    'success'
+                )
+            }
         })
     </script>
 </body>
