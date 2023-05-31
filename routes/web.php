@@ -28,9 +28,6 @@ Route::get('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('cha
 
 Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends');
 
-Route::get('test', function() {
-    return Carbon::today();
-});
 
 // auth route
 Route::get('logout', [LoginController::class, 'logout'])->name('logout-account');
