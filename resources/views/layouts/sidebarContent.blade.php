@@ -8,8 +8,10 @@
             <a href="{{ route('logout-account') }}">Logout</a>
         </div>
     </div>
-    <form id="form-search" method="post">
-        <input type="text" id="find-name">
+
+    <form id="form-search"  method="post">
+        <!-- @csrf -->
+        <input type="text" name="name" id="find-name">
         <button type="submit">
             <i class="fa-solid fa-magnifying-glass"></i>
         </button>
@@ -22,7 +24,7 @@
         </div>
         <div class="info-friend ">
             <h2 class="name-friend">M Agus Khamsinindo</h2>
-            <p class="highlight-chat">Lorem ipsum dolor sit.... </p>
+            <p class="highlight-chat"></p>
         </div>
     </div>
     <div class="group-list-friend">

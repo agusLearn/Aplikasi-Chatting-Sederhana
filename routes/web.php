@@ -27,6 +27,7 @@ Route::get('/', [AppController::class, 'appChat'])->name('appChat')->middleware(
 Route::get('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('chatRoom');
 
 Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends');
+Route::post('add-friends', [SearchFriendsController::class, 'addFriends'])->name('addFriends');
 
 
 // auth route

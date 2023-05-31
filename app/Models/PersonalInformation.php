@@ -9,9 +9,16 @@ class PersonalInformation extends Model
 {
     use HasFactory;
 
+    protected $table = 'personal_information';
+
     protected $fillable = [
         'user_id',
         'description',
         'photo_profile'
     ];
+
+
+    public function user(){
+        return $this->hasOne(User::class);
+    }
 }

@@ -121,10 +121,31 @@
                 data: {
                     name: name
                 },
-                success: function(res) {    
+                success: function(res) {   
+                    // console.log(res) 
                     $('#main-content').html(res.html)
                     $('#main-content').addClass('show-app-content');
                     $('#sidebar-content').addClass('hide-app-content');
+                }
+            })
+        })
+    </script>
+
+    <!-- add friends -->
+    <script>
+        $('body').on('click', '#content .add-friends', function(e) {
+            e.preventDefault()
+            let user = $(this).find('.user').val();
+            let x = $(this)
+            $.ajax({
+                type: "POST",
+                url: "{{ route('addFriends') }}",
+                data: {user:user},
+                success: function(res){
+                    console.log(res)
+                    if(res.status == 'success'){
+                        x.html('')
+                    }
                 }
             })
         })
