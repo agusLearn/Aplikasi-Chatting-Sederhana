@@ -13,15 +13,11 @@ class SearchFriendsController extends Controller
 {
     public function find(Request $data)
     {
-
-
         $id_user = Auth::user()->id;
-
-
 
         $listFriends = User::with(['personalInfo' => function ($query) {
             $query->select('user_id', 'description', 'photo_profile');
-            }])
+        }])
             ->where('users.id', '!=', $id_user)
             ->where('users.name', 'LIKE', '%' . $data->name . '%')
             ->whereNotExists(function ($query) use ($id_user) {
@@ -31,11 +27,19 @@ class SearchFriendsController extends Controller
                         $subquery->where('chat_rooms.user_1', '=', $id_user)
                             ->orWhere('chat_rooms.user_2', '=', $id_user);
                     })
-                    ->whereRaw('chat_rooms.user_1 = users.id OR chat_rooms.user_2 = users.id');
+                    ->where(function ($subquery) use ($id_user) {
+                        $subquery->whereRaw('chat_rooms.user_1 = users.id')
+                            ->orWhereRaw('chat_rooms.user_2 = users.id');
+                    })
+                    ->where(function ($subquery) use ($id_user) {
+                        $subquery->where('chat_rooms.user_1', '!=', $id_user)
+                            ->orWhere('chat_rooms.user_2', '!=', $id_user);
+                    });
             })
             ->get();
 
-        $html_find_friends = view('findFriends', ['friends' => $listFriends])->render();
+
+        $html_find_friends = view('findFriends', ['newFriends' => $listFriends])->render();
 
         return response()->json([
             'html' => $html_find_friends

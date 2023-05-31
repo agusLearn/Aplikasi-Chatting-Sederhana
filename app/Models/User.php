@@ -46,6 +46,10 @@ class User extends Authenticatable
 
     public function personalInfo()
     {
-        return $this->hasOne(PersonalInformation::class, 'user_id', 'id');
+        return $this->hasOne(PersonalInformation::class);
+    }
+
+    public function chatRoom(){
+        return $this->hasMany(ChatRoom::class);
     }
 }

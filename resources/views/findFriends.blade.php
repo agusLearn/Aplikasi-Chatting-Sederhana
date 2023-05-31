@@ -7,7 +7,7 @@
 
 <div id="content">
     <div id="find-friends">
-        @foreach($friends as $listFriends)
+        @foreach($newFriends as $listFriends)
         <div class="group-list-find-friends">
             <div class="foto-find-friends">
                 @if($listFriends->personalInfo->photo_profile === null)

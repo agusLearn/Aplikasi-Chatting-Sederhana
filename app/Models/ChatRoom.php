@@ -15,4 +15,12 @@ class ChatRoom extends Model
         'user_1',
         'user_2',
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function chat(){
+        return $this->hasMany(Chat::class);
+    }
 }

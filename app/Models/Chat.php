@@ -13,6 +13,12 @@ class Chat extends Model
 
     protected $fillable = [
         'room_id',
+        'user_id',
         'text'
     ];
+
+
+    public function ChatRoom(){
+        return $this->belongsTo(ChatRoom::class, 'room');
+    }
 }
