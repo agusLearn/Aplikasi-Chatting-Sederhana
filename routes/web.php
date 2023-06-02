@@ -24,7 +24,9 @@ use Illuminate\Support\Facades\Route;
 
 // application route
 Route::get('/', [AppController::class, 'appChat'])->name('appChat')->middleware('checkLogin');
-Route::get('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('chatRoom');
+
+Route::post('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('chatRoom');
+Route::post('send-chat-room', [ChattRoomController::class, 'sendChat'])->name('sendChatRoom');
 
 Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends');
 Route::post('add-friends', [SearchFriendsController::class, 'addFriends'])->name('addFriends');

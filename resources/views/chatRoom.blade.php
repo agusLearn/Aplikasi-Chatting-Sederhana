@@ -3,37 +3,46 @@
         <i class="fa-solid fa-arrow-left"></i>
     </div>
     <div class="information-user-chatting">
-        <h2 class="personal-name">M Agus Khamsinindo</h2>
-        <p class="last-seen">Last Online : 3 Hours Ago</p>
+        <h2 class="personal-name">{{ $user->name }}</h2>
+        @if($user->status_active == 1)
+        <p class="last-seen">Online</p>
+        @else
+        <p class="last-seen">{{ $status_user->updated_at->diffForHumans() }}</p>
+        @endif
     </div>
     <div id="remove-chat">
         <div class="btn-remove-chat">
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
         <div class="link-remove-chat">
-            <a href="#">Remove Chat</a>
+            <a href="{{ $user->id }}">Remove Chat</a>
         </div>
     </div>
 </div>
 
 <div id="content">
     <div id="content-chat">
-        <!-- // left chat -->
-        <div class="left-chat">
-            <p class="text-chat">
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Optio cupiditate quidem alias cumque iusto ipsum consectetur assumenda nemo nobis vero. Accusamus expedita fugit dolore officiis doloremque eius laborum dignissimos eos!
-            </p>
-            <p class="time-chat">07:30</p>
-        </div>
-        <!-- //right-chat -->
-        <div class="right-chat">
-            <div class="text-chat">
-                oke
+        @foreach($chat as $dataChat)
+            @if($dataChat->user_id  == Auth::user()->id)
+            <!-- //right-chat -->
+            <div class="right-chat">
+                <div class="text-chat">
+                    {{ $dataChat->text }}
+                </div>
+                <div class="time-chat">{{ $dataChat->created_at->diffForHumans() }}</div>
             </div>
-            <div class="time-chat">21:34</div>
-        </div>
+            @else
+            <!-- // left chat -->
+            <div class="left-chat">
+                <p class="text-chat">
+                    {{ $dataChat->text }}
+                </p>
+                <p class="time-chat">{{ $dataChat->created_at->diffForHumans() }}</p>
+            </div>
+            @endif
+        @endforeach 
     </div>
-    <form action="#" id="form-chat">
+    <form action="#" id="form-chat" data-chat_room ='{{ $chat_room }}'>
         <div class="group-form-chat">
             <textarea name="" id="text-chat" cols="50" rows="1" oninput="enter_grow(this)"></textarea>
             <div class="button-send">
@@ -44,4 +53,3 @@
         </div>
     </form>
 </div>
-

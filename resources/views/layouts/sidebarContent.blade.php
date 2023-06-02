@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <form id="form-search"  method="post">
+    <form id="form-search" method="post">
         <!-- @csrf -->
         <input type="text" name="name" id="find-name">
         <button type="submit">
@@ -18,7 +18,32 @@
     </form>
 </div>
 <div id="list-friends-chat">
-    <div class="group-list-friend">
+    @foreach($friends as $list)
+
+    @php $data_user = Auth::user()->id @endphp
+    @if($list->user_1 == $data_user)
+        @php $dataUser = $list->user_2 @endphp
+    @else
+        @php $dataUser = $list->user_1 @endphp
+    @endif
+
+    <div class="group-list-friend" data-room="{{ $list->room }}/{{ $dataUser }}">
+
+        <div class="photo-friend">
+            @if($list->photo_profile == null)
+            <img src="{{ asset('photo-profile/default.png') }}" alt="">
+            @else
+            <img src="{{ asset($list->photo_profile) }}" alt="">
+            @endif
+        </div>
+        <div class="info-friend ">
+            <h2 class="name-friend">{{ $list->user_name }}</h2>
+            <p class="highlight-chat"></p>
+        </div>
+    </div>
+    @endforeach
+    <!-- 
+        <div class="group-list-friend">
         <div class="photo-friend">
             <img src="{{ asset('photo-profile/default.png') }}" alt="">
         </div>
@@ -27,22 +52,5 @@
             <p class="highlight-chat"></p>
         </div>
     </div>
-    <div class="group-list-friend">
-        <div class="photo-friend">
-            <img src="{{ asset('photo-profile/default.png') }}" alt="">
-        </div>
-        <div class="info-friend ">
-            <h2 class="name-friend">Jamaluddin</h2>
-            <p class="highlight-chat">Sticker </p>
-        </div>
-    </div>
-    <div class="group-list-friend">
-        <div class="photo-friend">
-            <img src="{{ asset('photo-profile/default.png') }}" alt="">
-        </div>
-        <div class="info-friend ">
-            <h2 class="name-friend">Raden Ricky</h2>
-            <p class="highlight-chat">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ea tempora modi, </p>
-        </div>
-    </div>
+ -->
 </div>

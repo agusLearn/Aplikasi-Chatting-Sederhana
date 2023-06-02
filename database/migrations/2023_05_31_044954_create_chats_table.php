@@ -16,6 +16,7 @@ class CreateChatsTable extends Migration
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
             $table->string('room_id');
+            $table->unsignedBigInteger('user_id');
             $table->text('text');
             $table->timestamps();
             $table->foreign('room_id')->references('room')->on('chat_rooms')->onDelete('cascade');

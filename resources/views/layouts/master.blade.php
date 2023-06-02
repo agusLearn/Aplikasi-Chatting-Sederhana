@@ -91,10 +91,14 @@
         $('#list-friends-chat').on('click', '.group-list-friend', function() {
             addActiveClass($(this))
 
+            let room = $(this).data('room')
+
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: "{{ route('chatRoom') }}",
+                data:{room : room},
                 success: function(res) {
+                    // console.log(res)
                     $('#main-content').addClass('show-app-content');
                     $('#sidebar-content').addClass('hide-app-content');
                     $('#main-content').html(res.html_chat_room)
@@ -107,6 +111,33 @@
             $('.group-list-friend').removeClass('active-click')
             element.addClass('active-click')
         }
+    </script>
+
+    <!-- send chatting in room -->
+    <script>
+        $('body').on('submit', '#form-chat', function(e){
+            e.preventDefault();
+            let room = $(this).data('chat_room');
+            let textChat = $(this).find('#text-chat').val();
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('sendChatRoom') }}",
+                data: {room : room, text : textChat},
+                success: function(res) {    
+                    $('body').find('#form-chat #text-chat').val('');
+
+                    $('body').find('#content #content-chat').append(`
+                    <div class="right-chat">
+                        <div class="text-chat">
+                            ${res.chat.text}
+                        </div>
+                        <div class="time-chat"> ${res.time}</div>
+                    </div>
+                    `)
+                }
+            })
+        })
     </script>
 
     <!-- search friends -->
