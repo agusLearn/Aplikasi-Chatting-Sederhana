@@ -48,6 +48,8 @@
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+
     <!-- script csrf -->
     <script type="text/javascript">
         $.ajaxSetup({
@@ -55,6 +57,22 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
+    </script>
+
+
+    <!-- // pusher js -->
+    <script>
+        $(document).ready(function() {
+            // Enable pusher logging - don't include this in production
+            Pusher.logToConsole = true;
+
+            var pusher = new Pusher('17034a2e9c291053cb4e', {
+                cluster: 'ap1'
+            });
+
+
+
+        })
     </script>
 
 
@@ -92,6 +110,7 @@
             addActiveClass($(this))
 
             let room = $(this).data('room')
+            let roomChatting = $(this).data('room_chatting')
 
             $.ajax({
                 type: 'POST',
@@ -104,9 +123,37 @@
                     $('#main-content').addClass('show-app-content');
                     $('#sidebar-content').addClass('hide-app-content');
                     $('#main-content').html(res.html_chat_room)
-
                     // make see last content
                     buttomChat();
+
+                    Pusher.logToConsole = true;
+                    var pusher = new Pusher('17034a2e9c291053cb4e', {
+                        cluster: 'ap1'
+                    });
+                    
+                    let channel = pusher.subscribe(`private.chat-${roomChatting}`);
+                    channel.bind('chat-request', function(data) {
+                        if ("{{ Auth::user()->id }}" == data.id) {
+                            $('body').find('#content #content-chat').append(`
+                                    <div class="chat right-chat">
+                                        <div class="text-chat">
+                                        ${data.text}
+                                        </div>
+                                        <div class="time-chat"> ${data.time}</div>
+                                    </div>
+                                    `);
+                        } else {
+                            $('body').find('#content #content-chat').append(`
+                                    <div class="chat">
+                                        <div class="text-chat">
+                                        ${data.text}
+                                        </div>
+                                        <div class="time-chat"> ${data.time}</div>
+                                    </div>
+                                    `);
+                        }
+                        buttomChat();
+                    });
                 }
             })
         })
@@ -133,18 +180,9 @@
                     text: textChat
                 },
                 success: function(res) {
-                    $('body').find('#form-chat #text-chat').val('');
-
-                    $('body').find('#content #content-chat').append(`
-                    <div class="right-chat">
-                        <div class="text-chat">
-                            ${res.chat.text}
-                        </div>
-                        <div class="time-chat"> ${res.time}</div>
-                    </div>
-                    `)
-
-                    buttomChat();
+                    if (res.status == 'success') {
+                        $('body').find('#form-chat #text-chat').val('');
+                    }
                 }
             })
         })

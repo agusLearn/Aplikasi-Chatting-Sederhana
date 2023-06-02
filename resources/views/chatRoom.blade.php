@@ -23,26 +23,15 @@
 <div id="content">
     <div id="content-chat">
         @foreach($chat as $dataChat)
-            @if($dataChat->user_id  == Auth::user()->id)
-            <!-- //right-chat -->
-            <div class="right-chat">
-                <div class="text-chat">
-                    {{ $dataChat->text }}
-                </div>
-                <div class="time-chat">{{ $dataChat->created_at->diffForHumans() }}</div>
+        <div class="chat {{ $dataChat->user_id == Auth::user()->id ? ' right-chat' : '' }}">
+            <div class="text-chat">
+                {{ $dataChat->text }}
             </div>
-            @else
-            <!-- // left chat -->
-            <div class="left-chat">
-                <p class="text-chat">
-                    {{ $dataChat->text }}
-                </p>
-                <p class="time-chat">{{ $dataChat->created_at->diffForHumans() }}</p>
-            </div>
-            @endif
-        @endforeach 
+            <div class="time-chat">{{ $dataChat->created_at->diffForHumans() }}</div>
+        </div>
+        @endforeach
     </div>
-    <form action="#" id="form-chat" data-chat_room ='{{ $chat_room }}'>
+    <form action="#" id="form-chat" data-chat_room='{{ $chat_room }}'>
         <div class="group-form-chat">
             <textarea name="" id="text-chat" cols="50" rows="1" oninput="enter_grow(this)"></textarea>
             <div class="button-send">

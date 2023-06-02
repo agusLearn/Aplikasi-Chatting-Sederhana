@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SendChat;
 use App\Models\Chat;
 use App\Models\PersonalInformation;
 use App\Models\User;
@@ -40,10 +41,10 @@ class ChattRoomController extends Controller
             return response()->json(['status' => 'failed', 'message' => 'something wrong with system Chat']);
         }
 
-        // nanti disini menggunakan pusher live server
-        return response()->json([
-            'chat'=>$chatting,
-            'time'=>$chatting->created_at->diffForHumans()
-        ]);
+
+        event(new SendChat($chatting->text, $chatting->created_at->diffForHumans(), $chat->room, $chatting->user_id));
+
+        // // nanti disini menggunakan pusher live server
+        return response()->json(['status' =>'success']);
     }
 }

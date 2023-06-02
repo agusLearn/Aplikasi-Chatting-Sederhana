@@ -1,5 +1,6 @@
 <?php
 
+use App\Events\SendChat;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChattRoomController;
@@ -30,6 +31,13 @@ Route::post('send-chat-room', [ChattRoomController::class, 'sendChat'])->name('s
 
 Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends');
 Route::post('add-friends', [SearchFriendsController::class, 'addFriends'])->name('addFriends');
+
+
+Route::get('cobaan', function() {
+    event(new SendChat('Pusher Berjalan dengan benar'));
+
+    return view('coba');
+});
 
 
 // auth route

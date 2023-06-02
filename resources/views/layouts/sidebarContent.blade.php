@@ -27,7 +27,7 @@
         @php $dataUser = $list->user_1 @endphp
     @endif
 
-    <div class="group-list-friend" data-room="{{ $list->room }}/{{ $dataUser }}">
+    <div class="group-list-friend" data-room="{{ $list->room }}/{{ $dataUser }}" data-room_chatting="{{ $list->room }}">
 
         <div class="photo-friend">
             @if($list->photo_profile == null)
