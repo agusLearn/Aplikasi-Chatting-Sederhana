@@ -96,12 +96,17 @@
             $.ajax({
                 type: 'POST',
                 url: "{{ route('chatRoom') }}",
-                data:{room : room},
+                data: {
+                    room: room
+                },
                 success: function(res) {
                     // console.log(res)
                     $('#main-content').addClass('show-app-content');
                     $('#sidebar-content').addClass('hide-app-content');
                     $('#main-content').html(res.html_chat_room)
+
+                    // make see last content
+                    buttomChat();
                 }
             })
         })
@@ -115,7 +120,7 @@
 
     <!-- send chatting in room -->
     <script>
-        $('body').on('submit', '#form-chat', function(e){
+        $('body').on('submit', '#form-chat', function(e) {
             e.preventDefault();
             let room = $(this).data('chat_room');
             let textChat = $(this).find('#text-chat').val();
@@ -123,8 +128,11 @@
             $.ajax({
                 type: 'POST',
                 url: "{{ route('sendChatRoom') }}",
-                data: {room : room, text : textChat},
-                success: function(res) {    
+                data: {
+                    room: room,
+                    text: textChat
+                },
+                success: function(res) {
                     $('body').find('#form-chat #text-chat').val('');
 
                     $('body').find('#content #content-chat').append(`
@@ -135,6 +143,8 @@
                         <div class="time-chat"> ${res.time}</div>
                     </div>
                     `)
+
+                    buttomChat();
                 }
             })
         })
@@ -152,7 +162,7 @@
                 data: {
                     name: name
                 },
-                success: function(res) {   
+                success: function(res) {
                     // console.log(res) 
                     $('#main-content').html(res.html)
                     $('#main-content').addClass('show-app-content');
@@ -171,10 +181,12 @@
             $.ajax({
                 type: "POST",
                 url: "{{ route('addFriends') }}",
-                data: {user:user},
-                success: function(res){
+                data: {
+                    user: user
+                },
+                success: function(res) {
                     console.log(res)
-                    if(res.status == 'success'){
+                    if (res.status == 'success') {
                         x.html('')
                     }
                 }
@@ -191,6 +203,15 @@
             $('#header-main-content').html(''); // remove content in header  content
             $('#content').html(''); // remove content
         })
+    </script>
+
+
+    <!-- make scroll chat always bottom -->
+    <script>
+        let buttomChat = function() {
+            let content = $('body').find('#content-chat');
+            content.scrollTop(content[0].scrollHeight)
+        }
     </script>
 
 
