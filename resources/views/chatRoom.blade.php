@@ -7,7 +7,7 @@
         @if($user->status_active == 1)
         <p class="last-seen">Online</p>
         @else
-        <p class="last-seen">{{ $status_user->updated_at->diffForHumans() }}</p>
+        <p class="last-seen">{{ $user->updated_at->diffForHumans() }}</p>
         @endif
     </div>
     <div id="remove-chat">

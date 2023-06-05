@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Events\SendChat;
 use App\Models\Chat;
+use App\Models\ChatRoom;
 use App\Models\PersonalInformation;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -30,7 +31,17 @@ class ChattRoomController extends Controller
 
     public function sendChat(Request $chat)
     {
-
+        
+        $this->validate($chat, [
+            'room' => 'required',
+            'text' => 'required|string'
+        ]);
+        
+        $checkRoom = ChatRoom::where('room', $chat->room)->first();
+        if($checkRoom == null){
+            return response()->json(['status' => 'roomNotFound', 'message' => 'dont change room id in inspect element']);
+        }
+        
         $chatting = Chat::create([
             'room_id' => $chat->room,
             'user_id' => Auth::user()->id,

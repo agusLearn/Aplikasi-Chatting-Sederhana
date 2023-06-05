@@ -53,7 +53,7 @@
             </div>
             <div id="modal-content">
                 <div class="profile-user">
-                    <div class="img-wrapper" >
+                    <div class="img-wrapper">
                         <img src="" alt="default" id="img-profile">
                     </div>
                     <div class="name-user">
@@ -98,6 +98,9 @@
     <!-- bootstrap js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
+    <!-- sweetalert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
 
     <!-- script csrf -->
@@ -114,11 +117,11 @@
     <script>
         $(document).ready(function() {
             // Enable pusher logging - don't include this in production
-            // Pusher.logToConsole = true;
+            Pusher.logToConsole = true;
 
-            // var pusher = new Pusher('17034a2e9c291053cb4e', {
-            //     cluster: 'ap1'
-            // });
+            var pusher = new Pusher('17034a2e9c291053cb4e', {
+                cluster: 'ap1'
+            });
 
 
 
@@ -151,7 +154,6 @@
                 el.style.height = (el.scrollHeight) + "px"
             }
         }
-
     </script>
 
     <!-- profile -->
@@ -165,14 +167,14 @@
             $.ajax({
                 type: 'GET',
                 url: "{{ route('profile') }}",
-                success: function(res){
+                success: function(res) {
                     console.log(res)
                     let photo = "photo-profile/default.png";
                     let des = "writing ur description"
-                    if(res.photo_profile !== null){
+                    if (res.photo_profile !== null) {
                         photo = res.path_photo_profile;
                     }
-                    if(res.description !== null){
+                    if (res.description !== null) {
                         des = res.description
                     }
                     $('#modal-content').find('#img-profile').attr('src', `{{ asset('${photo}') }}`)
@@ -183,22 +185,22 @@
         })
 
         // go to edit user form
-        $('#modal-user-profile .button-edit-profile').click(function(){
+        $('#modal-user-profile .button-edit-profile').click(function() {
             $('#modal-content').find('.profile-user').toggleClass('hide-content-modal')
             $('#modal-content').find('#edit-user').toggleClass('show-content-modal')
-            let img =  $('#modal-content').find('#img-profile').attr('src');
-            let name =  $('#modal-content').find('.name-user').text();
-            let desc =  $('#modal-content').find('.describe').text();
+            let img = $('#modal-content').find('#img-profile').attr('src');
+            let name = $('#modal-content').find('.name-user').text();
+            let desc = $('#modal-content').find('.describe').text();
 
-            
+
             let nameEdit = $('#edit-user').find('#name').val(name);
             let descEdit = $('#edit-user').find('#dc').val(desc);
             $('#modal-content').find('#img-edit-user').attr('src', `${img}`)
-        
+
         })
 
         // save edit user
-        $('#edit-user').on('submit', function(e){
+        $('#edit-user').on('submit', function(e) {
             e.preventDefault();
             let formEditProfile = new FormData(this);
 
@@ -208,10 +210,10 @@
                 data: formEditProfile,
                 contentType: false,
                 processData: false,
-                success: function(res){
-                    if(res.status == 'failed'){
+                success: function(res) {
+                    if (res.status == 'failed') {
                         alert(res.message)
-                    }else{
+                    } else {
                         alert(res.message)
                     }
                 }
@@ -243,7 +245,7 @@
                     room: room
                 },
                 success: function(res) {
-                    // console.log(res)
+                    console.log(res)
                     $('#main-content').addClass('show-app-content');
                     $('#sidebar-content').addClass('hide-app-content');
                     $('#main-content').html(res.html_chat_room)
@@ -304,8 +306,21 @@
                 },
                 success: function(res) {
                     if (res.status == 'success') {
-                        $('body').find('#form-chat #text-chat').val('');    
-                        $('body').find('#form-chat #text-chat').css('height', '39px');    
+                        $('body').find('#form-chat #text-chat').val('');
+                        $('body').find('#form-chat #text-chat').css('height', '39px');
+                    }
+                    if (res.status == 'roomNotFound') {
+                        Swal.fire(
+                            'Dont Cheating?',
+                            res.message,
+                            'error'
+                        )
+                    }
+                },
+                error: function(err) {
+                    if (err.status === 422) {
+                        let errors = $.parseJSON(err.responseText);
+                        Swal.fire('Chat is still empty, please fill it in with words')
                     }
                 }
             })
