@@ -14,7 +14,8 @@ class PersonalInformation extends Model
     protected $fillable = [
         'user_id',
         'description',
-        'photo_profile'
+        'photo_profile',
+        'path_photo_profile'
     ];
 
 

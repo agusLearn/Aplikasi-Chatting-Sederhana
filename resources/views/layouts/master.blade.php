@@ -43,6 +43,56 @@
     </div>
 
 
+    <div id="modal-user-profile" class="modal-page">
+        <div class="modal-wrapper">
+            <div class="modal-close-button">
+                <i class="fa-sharp fa-solid fa-circle-xmark"></i>
+            </div>
+            <div id="modal-title">
+                <h2 class="title">Profile User</h2>
+            </div>
+            <div id="modal-content">
+                <div class="profile-user">
+                    <div class="img-wrapper" >
+                        <img src="" alt="default" id="img-profile">
+                    </div>
+                    <div class="name-user">
+                    </div>
+                    <div class="describe">
+                    </div>
+                    <div class="button-edit-profile">
+                        Edit Profile
+                    </div>
+                </div>
+
+                <form action="#" id="edit-user" enctype="multipart/form-data">
+                    <div class="row gy-3">
+                        <div class="col-md-6 col-12">
+                            <div class="img-wrapper">
+                                <img src="" alt="" id="img-edit-user">
+                            </div>
+                        </div>
+                        <!-- button add image -->
+                        <div class="col-md-6 col-12 center-input">
+                            <input type="file" name="new_file_photo">
+                        </div>
+                    </div>
+                    <div class="group-edit-user">
+                        <label for="dc">Username :</label>
+                        <input type="text" name="name" id="name">
+                    </div>
+                    <div class="group-edit-user">
+                        <label for="dc">Describe :</label>
+                        <textarea name="description" id="dc"></textarea>
+                    </div>
+
+                    <button type="submit">Save Change Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
     <!-- jquery cdn -->
     <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
     <!-- bootstrap js -->
@@ -64,11 +114,11 @@
     <script>
         $(document).ready(function() {
             // Enable pusher logging - don't include this in production
-            Pusher.logToConsole = true;
+            // Pusher.logToConsole = true;
 
-            var pusher = new Pusher('17034a2e9c291053cb4e', {
-                cluster: 'ap1'
-            });
+            // var pusher = new Pusher('17034a2e9c291053cb4e', {
+            //     cluster: 'ap1'
+            // });
 
 
 
@@ -91,7 +141,7 @@
             open_link_remove_chat.toggleClass('show-link-remove-chat')
         })
 
-
+        // enter textarea will otomatis +height until max 159px
         function enter_grow(el) {
             el.style.height = "10px";
             let size_el_textarea = el.scrollHeight;
@@ -101,7 +151,81 @@
                 el.style.height = (el.scrollHeight) + "px"
             }
         }
+
     </script>
+
+    <!-- profile -->
+    <script>
+        // open profile
+        $('#profile').on('click', function(e) {
+            e.preventDefault();
+            $('.modal-page').toggleClass('show-modal-page')
+            $('#open-sub-menu-sidebar').parent().find('.sub-menu-sidebar-content').toggleClass('show-sub-menu-sidebar-content');
+
+            $.ajax({
+                type: 'GET',
+                url: "{{ route('profile') }}",
+                success: function(res){
+                    console.log(res)
+                    let photo = "photo-profile/default.png";
+                    let des = "writing ur description"
+                    if(res.photo_profile !== null){
+                        photo = res.path_photo_profile;
+                    }
+                    if(res.description !== null){
+                        des = res.description
+                    }
+                    $('#modal-content').find('#img-profile').attr('src', `{{ asset('${photo}') }}`)
+                    $('#modal-content').find('.name-user').html(res.name)
+                    $('#modal-content').find('.describe').html(des)
+                }
+            })
+        })
+
+        // go to edit user form
+        $('#modal-user-profile .button-edit-profile').click(function(){
+            $('#modal-content').find('.profile-user').toggleClass('hide-content-modal')
+            $('#modal-content').find('#edit-user').toggleClass('show-content-modal')
+            let img =  $('#modal-content').find('#img-profile').attr('src');
+            let name =  $('#modal-content').find('.name-user').text();
+            let desc =  $('#modal-content').find('.describe').text();
+
+            
+            let nameEdit = $('#edit-user').find('#name').val(name);
+            let descEdit = $('#edit-user').find('#dc').val(desc);
+            $('#modal-content').find('#img-edit-user').attr('src', `${img}`)
+        
+        })
+
+        // save edit user
+        $('#edit-user').on('submit', function(e){
+            e.preventDefault();
+            let formEditProfile = new FormData(this);
+
+            $.ajax({
+                type: "POST",
+                url: "{{ route('saveEditProfile') }}",
+                data: formEditProfile,
+                contentType: false,
+                processData: false,
+                success: function(res){
+                    if(res.status == 'failed'){
+                        alert(res.message)
+                    }else{
+                        alert(res.message)
+                    }
+                }
+            })
+
+        })
+
+        $('.modal-close-button').click(function() {
+            $('.modal-page').toggleClass('show-modal-page')
+            $('#modal-content').find('.profile-user').removeClass('hide-content-modal')
+            $('#modal-content').find('#edit-user').removeClass('show-content-modal')
+        })
+    </script>
+
 
 
     <!-- open chat room  -->
@@ -126,11 +250,10 @@
                     // make see last content
                     buttomChat();
 
-                    Pusher.logToConsole = true;
                     var pusher = new Pusher('17034a2e9c291053cb4e', {
                         cluster: 'ap1'
                     });
-                    
+
                     let channel = pusher.subscribe(`private.chat-${roomChatting}`);
                     channel.bind('chat-request', function(data) {
                         if ("{{ Auth::user()->id }}" == data.id) {
@@ -181,7 +304,8 @@
                 },
                 success: function(res) {
                     if (res.status == 'success') {
-                        $('body').find('#form-chat #text-chat').val('');
+                        $('body').find('#form-chat #text-chat').val('');    
+                        $('body').find('#form-chat #text-chat').css('height', '39px');    
                     }
                 }
             })

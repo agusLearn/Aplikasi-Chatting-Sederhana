@@ -4,6 +4,7 @@ use App\Events\SendChat;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ChattRoomController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchFriendsController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,12 @@ use Illuminate\Support\Facades\Route;
 // application route
 Route::get('/', [AppController::class, 'appChat'])->name('appChat')->middleware('checkLogin');
 
+
+// profile process
+Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
+Route::post('edit-profile', [ProfileController::class, 'saveEditProfile'])->name('saveEditProfile');
+
+// chat process
 Route::post('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('chatRoom');
 Route::post('send-chat-room', [ChattRoomController::class, 'sendChat'])->name('sendChatRoom');
 
@@ -33,11 +40,6 @@ Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('s
 Route::post('add-friends', [SearchFriendsController::class, 'addFriends'])->name('addFriends');
 
 
-Route::get('cobaan', function() {
-    event(new SendChat('Pusher Berjalan dengan benar'));
-
-    return view('coba');
-});
 
 
 // auth route

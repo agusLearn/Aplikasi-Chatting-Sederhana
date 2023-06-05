@@ -15,7 +15,7 @@ class AppController extends Controller
         $user_id = Auth::user()->id;
 
         $friends = DB::table('chat_rooms')
-            ->select('chat_rooms.*', 'u.name AS user_name', 'u.email AS user_email', 'pi.description', 'pi.photo_profile', DB::raw('coalesce(chats.text, "") as text'), DB::raw('coalesce(chats.created_at, chat_rooms.created_at) as time'))
+            ->select('chat_rooms.*', 'u.name AS user_name', 'u.email AS user_email', 'pi.description', 'pi.photo_profile','pi.path_photo_profile' ,DB::raw('coalesce(chats.text, "") as text'), DB::raw('coalesce(chats.created_at, chat_rooms.created_at) as time'))
             ->leftJoin(DB::raw('(SELECT MAX(chats.created_at) AS max_time, room_id
                      FROM chats
                      GROUP BY room_id) latest_chats'), function ($join) {

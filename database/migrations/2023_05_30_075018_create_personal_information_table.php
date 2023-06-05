@@ -18,6 +18,7 @@ class CreatePersonalInformationTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('description')->nullable();
             $table->string('photo_profile')->nullable();
+            $table->string('path_photo_profile')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });

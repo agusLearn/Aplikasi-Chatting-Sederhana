@@ -4,7 +4,7 @@
             <i class="fa-solid fa-bars"></i>
         </div>
         <div class="sub-menu-sidebar-content">
-            <a href="#">profile</a>
+            <a href="#" id="profile">profile</a>
             <a href="{{ route('logout-account') }}">Logout</a>
         </div>
     </div>
@@ -33,12 +33,16 @@
             @if($list->photo_profile == null)
             <img src="{{ asset('photo-profile/default.png') }}" alt="">
             @else
-            <img src="{{ asset($list->photo_profile) }}" alt="">
+            <img src="{{ asset($list->path_photo_profile) }}" alt="">
             @endif
         </div>
         <div class="info-friend ">
             <h2 class="name-friend">{{ $list->user_name }}</h2>
+            @if($list->text !== null)
+            <p class="highlight-chat">{{ Str::limit($list->text, $limit = 20, $end = '...') }}</p>
+            @else
             <p class="highlight-chat"></p>
+            @endif
         </div>
     </div>
     @endforeach
