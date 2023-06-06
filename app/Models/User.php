@@ -18,7 +18,7 @@ class User extends Authenticatable
      * @var string[]
      */
 
-     protected $table= 'users';
+    protected $table = 'users';
 
     protected $fillable = [
         'name',
@@ -49,10 +49,11 @@ class User extends Authenticatable
 
     public function personalInfo()
     {
-        return $this->belongsTo(PersonalInformation::class, 'user_id');
+        return $this->hasOne(PersonalInformation::class, 'user_id');
     }
 
-    public function chatRoom(){
+    public function chatRoom()
+    {
         return $this->hasMany(ChatRoom::class);
     }
 }

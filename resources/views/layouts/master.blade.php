@@ -117,11 +117,11 @@
     <script>
         $(document).ready(function() {
             // Enable pusher logging - don't include this in production
-            Pusher.logToConsole = true;
+            // Pusher.logToConsole = true;
 
-            var pusher = new Pusher('17034a2e9c291053cb4e', {
-                cluster: 'ap1'
-            });
+            // var pusher = new Pusher('17034a2e9c291053cb4e', {
+            //     cluster: 'ap1'
+            // });
 
 
 
@@ -133,7 +133,6 @@
         // open bars menu
         $('#open-sub-menu-sidebar').click(function() {
             let subMenuSideBar = $(this).parent().find('.sub-menu-sidebar-content');
-            // console.log(subMenuSideBar)
             subMenuSideBar.toggleClass('show-sub-menu-sidebar-content');
         })
 
@@ -170,7 +169,7 @@
                 success: function(res) {
                     console.log(res)
                     let photo = "photo-profile/default.png";
-                    let des = "writing ur description"
+                    let des = "writing ur description";
                     if (res.photo_profile !== null) {
                         photo = res.path_photo_profile;
                     }
@@ -245,7 +244,7 @@
                     room: room
                 },
                 success: function(res) {
-                    console.log(res)
+                    // console.log(res)
                     $('#main-content').addClass('show-app-content');
                     $('#sidebar-content').addClass('hide-app-content');
                     $('#main-content').html(res.html_chat_room)
@@ -340,10 +339,12 @@
                     name: name
                 },
                 success: function(res) {
-                    // console.log(res) 
+                    console.log(res)
+                    $('#list-friends-chat').find('.active-click').removeClass('active-click ');
                     $('#main-content').html(res.html)
                     $('#main-content').addClass('show-app-content');
                     $('#sidebar-content').addClass('hide-app-content');
+                    
                 }
             })
         })

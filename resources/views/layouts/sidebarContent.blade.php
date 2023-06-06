@@ -9,7 +9,7 @@
         </div>
     </div>
 
-    <form id="form-search" method="post">
+    <form  id="form-search" method="post">
         <!-- @csrf -->
         <input type="text" name="name" id="find-name">
         <button type="submit">

@@ -10,10 +10,10 @@
         @foreach($newFriends as $listFriends)
         <div class="group-list-find-friends">
             <div class="foto-find-friends">
-                @if($listFriends->personalInfo->photo_profile === null)
-                <img src="{{ asset('photo-profile/default.png') }}" alt="">
+                @if($listFriends->personalInfo->path_photo_profile === null)
+                <img src="{{ asset('photo-profile/default.png') }}" alt="default.png">
                 @else
-                <img src="{{ asset('photo-profile/default.png') }}" alt="">
+                <img src="{{ asset($listFriends->personalInfo->path_photo_profile) }}" alt="{{ $listFriends->personalInfo->photo_profile }}">
                 @endif
             </div>
             <h2 class="name-find-friends">{{ $listFriends->name }}</h2>

@@ -26,6 +26,7 @@ class ChattRoomController extends Controller
 
         $html_room_chat = view('chatRoom', ['chat' => $chat, 'user' => $info_user_friends, 'status_user' => $personalInfo, 'chat_room' => $room])->render();
 
+        // return response()->json(['chat' => $chat, 'user' => $info_user_friends, 'status_user' => $personalInfo, 'chat_room' => $room]);
         return response()->json(['html_chat_room' => $html_room_chat]);
     }
 
@@ -57,5 +58,13 @@ class ChattRoomController extends Controller
 
         // // nanti disini menggunakan pusher live server
         return response()->json(['status' =>'success']);
+    }
+
+
+
+    public function removeChat(Request $data)
+    {
+        $statusDelete = ChatRoom::where('room', $data->room_remove)->delete();
+        return $statusDelete == 1 ? redirect()->route('appChat') : redirect()->back();
     }
 }

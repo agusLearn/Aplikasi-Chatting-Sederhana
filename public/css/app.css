@@ -396,13 +396,13 @@ p {
 }
 
 .foto-find-friends {
-    width: 57px;
+    width: 63px;
 }
 
 .foto-find-friends img {
     width: 100%;
-    height: inherit;
-    object-fit: fill;
+    height: 58px;
+    object-fit: cover;
     border-radius: 50%;
 }
 
@@ -611,4 +611,15 @@ p {
         display: none !important; 
     }
 
+
+    /* css new find friends versi under size 1119px */
+    .foto-find-friends{
+        width: 79px;
+    }
+    .foto-find-friends img{
+        height: 55px;
+    }
+    .name-find-friends{
+        font-size: 1.2rem;
+    }
 }

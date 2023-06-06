@@ -16,7 +16,7 @@ class SearchFriendsController extends Controller
         $id_user = Auth::user()->id;
 
         $listFriends = User::with(['personalInfo' => function ($query) {
-            $query->select('user_id', 'description', 'photo_profile');
+            $query->select('user_id', 'description', 'photo_profile', 'path_photo_profile');
         }])
             ->where('users.id', '!=', $id_user)
             ->where('users.name', 'LIKE', '%' . $data->name . '%')
@@ -38,7 +38,7 @@ class SearchFriendsController extends Controller
             })
             ->get();
 
-
+        // dd($listFriends);
         $html_find_friends = view('findFriends', ['newFriends' => $listFriends])->render();
 
         return response()->json([

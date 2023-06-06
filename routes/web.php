@@ -28,19 +28,21 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AppController::class, 'appChat'])->name('appChat')->middleware('checkLogin');
 
 
-// profile process
-Route::get('profile', [ProfileController::class, 'profile'])->name('profile');
-Route::post('edit-profile', [ProfileController::class, 'saveEditProfile'])->name('saveEditProfile');
+// profile route
+Route::get('profile', [ProfileController::class, 'profile'])->name('profile')->middleware('checkLogin');
+Route::post('edit-profile', [ProfileController::class, 'saveEditProfile'])->name('saveEditProfile')->middleware('checkLogin');
 
-// chat process
-Route::post('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('chatRoom');
-Route::post('send-chat-room', [ChattRoomController::class, 'sendChat'])->name('sendChatRoom');
-
-Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends');
-Route::post('add-friends', [SearchFriendsController::class, 'addFriends'])->name('addFriends');
+// chat route
+Route::post('chat-room', [ChattRoomController::class, 'viewRoomChat'])->name('chatRoom')->middleware('checkLogin');
+Route::post('send-chat-room', [ChattRoomController::class, 'sendChat'])->name('sendChatRoom')->middleware('checkLogin');
 
 
+// search route
+Route::post('search-friends', [SearchFriendsController::class, 'find'])->name('searchFriends')->middleware('checkLogin');
+Route::post('add-friends', [SearchFriendsController::class, 'addFriends'])->name('addFriends')->middleware('checkLogin');
 
+// remove chat route
+Route::post('remove-chat',[ChattRoomController::class, 'removeChat'])->name('removeChat');
 
 // auth route
 Route::get('logout', [LoginController::class, 'logout'])->name('logout-account');

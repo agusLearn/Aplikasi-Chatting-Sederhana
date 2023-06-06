@@ -15,7 +15,11 @@
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </div>
         <div class="link-remove-chat">
-            <a href="{{ $user->id }}">Remove Chat</a>
+            <a onclick="document.getElementById('removeRoom').submit();">Remove Chat</a>
+            <form action="{{ route('removeChat') }}" method="post" id="removeRoom">
+                @csrf
+                <input type="hidden" name="room_remove" value="{{$chat_room}}">
+            </form>
         </div>
     </div>
 </div>
